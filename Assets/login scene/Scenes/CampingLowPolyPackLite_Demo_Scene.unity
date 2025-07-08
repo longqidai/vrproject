@@ -75842,7 +75842,11 @@ MonoBehaviour:
   m_CameraFloorOffsetObject: {fileID: 5451753970799829456}
   m_RequestedTrackingOriginMode: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_CameraYOffset: 2
+=======
+  m_CameraYOffset: 1.36144
+>>>>>>> parent of 361b040 (bug)
 =======
   m_CameraYOffset: 1.36144
 >>>>>>> parent of 361b040 (bug)
