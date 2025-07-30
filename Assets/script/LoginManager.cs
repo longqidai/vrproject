@@ -40,6 +40,7 @@ public class LoginManager : MonoBehaviourPunCallbacks
     public override void OnConnected()
     {
         Debug.Log("OnConnected is called. The server is available!");
+        PhotonNetwork.LoadLevel("Meetingscene");
     }
 
     public override void OnConnectedToMaster()
