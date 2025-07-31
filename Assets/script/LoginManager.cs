@@ -1,51 +1,80 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Photon.Pun;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI; // 添加UI命名空间
+using Photon.Realtime;
 
 public class LoginManager : MonoBehaviourPunCallbacks
 {
-    public TMP_InputField PlayerName_InputName;
-    #region Unity Methods
-    // Start is called before the first frame update
-    void Start()
+    public TMP_InputField PlayerName_InputField;
+    public Button loginButton;
+    public Button anonymousButton; // 建议添加匿名按钮引用
+    public TextMeshProUGUI statusText;
+    private bool _isConnecting;
+
+    #region UI Callback Methods
+    public void ConnectAnonymously()
     {
+        _isConnecting = true;
+        // 修复大小写错误 ↓
+        PhotonNetwork.NickName = "Guest_" + Random.Range(1000, 9999);
+        // 修复方法名拼写 ↓
         PhotonNetwork.ConnectUsingSettings();
+
+        // 添加UI反馈 ↓
+        statusText.text = "Connecting anonymously...";
+        statusText.color = Color.yellow;
+        anonymousButton.interactable = false; // 禁用按钮
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ConnectWithName()
     {
-    }
-    #endregion
-
-    #region UI Callback methods
-    public void ConnectAnoymously()
-    {
-        PhotonNetwork.ConnectUsingSettings();
-    }
-
-    public void ConnectToPhotonServer()
-    {
-        if (PlayerName_InputName != null)
+        if (string.IsNullOrEmpty(PlayerName_InputField.text))
         {
-            PhotonNetwork.NickName = PlayerName_InputName.text;
-            PhotonNetwork.ConnectUsingSettings();
+            Debug.LogError("Player name is empty!");
+            statusText.text = "Name cannot be empty!";
+            statusText.color = Color.red;
+            return;
         }
+
+        _isConnecting = true;
+        // 修复属性大小写 ↓
+        PhotonNetwork.NickName = PlayerName_InputField.text;
+        // 修复方法名拼写 ↓
+        PhotonNetwork.ConnectUsingSettings();
+
+        statusText.text = "Connecting...";
+        statusText.color = Color.yellow;
+        loginButton.interactable = false; // 禁用按钮
     }
     #endregion
 
     #region Photon Callback Methods
-    public override void OnConnected()
+    public override void OnConnectedToMaster()
     {
-        Debug.Log("OnConnected is called. The server is available!");
+        if (!_isConnecting) return;
+
+        Debug.Log($"Connected to Master Server as {PhotonNetwork.NickName}");
+        statusText.text = "Connected! Joining lobby...";
+        statusText.color = Color.green;
+
+        // 加入大厅（触发OnJoinedLobby）
+        PhotonNetwork.JoinLobby();
+    }
+
+    public override void OnJoinedLobby()
+    {
         PhotonNetwork.LoadLevel("Meetingscene");
     }
 
-    public override void OnConnectedToMaster()
+    public override void OnDisconnected(DisconnectCause cause)
     {
-        Debug.Log("Connected to Master Serve with player name:" + PhotonNetwork.NickName);
+        // 连接失败恢复UI
+        _isConnecting = false;
+        statusText.text = $"Connection failed: {cause}";
+        statusText.color = Color.red;
+        loginButton.interactable = true;
+        if (anonymousButton != null) anonymousButton.interactable = true;
     }
     #endregion
 }
