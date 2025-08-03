@@ -2339,12 +2339,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 585507987}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.9171992, z: 0, w: 0.39842898}
-  m_LocalPosition: {x: -3.077, y: 2.16, z: -13.219}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.00000017881393}
+  m_LocalPosition: {x: -0.04499687, y: 0.94000006, z: 0.049651496}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1280231109}
   m_LocalEulerAnglesHint: {x: 0, y: 133.04, z: 0}
 --- !u!1001 &589538265
 PrefabInstance:
@@ -3433,7 +3433,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: please choose the way you login
+  m_text: Connecting anonymously...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3442,8 +3442,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278512639
+  m_fontColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5793,7 +5793,7 @@ PrefabInstance:
     - target: {fileID: 670551045257966494, guid: ecb28fd2751b37a419237de32586dcb7,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -614.8572
+      value: 17.142841
       objectReference: {fileID: 0}
     - target: {fileID: 695616758861810245, guid: ecb28fd2751b37a419237de32586dcb7,
         type: 3}
@@ -6124,6 +6124,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: LoginManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6945980870508891793, guid: ecb28fd2751b37a419237de32586dcb7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.87
       objectReference: {fileID: 0}
     - target: {fileID: 6980298707170653923, guid: ecb28fd2751b37a419237de32586dcb7,
         type: 3}
@@ -6472,10 +6477,11 @@ Transform:
   m_GameObject: {fileID: 1280231105}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.3984288, z: 0, w: 0.91719925}
-  m_LocalPosition: {x: -3.01, y: 2.13, z: -13.22}
+  m_LocalPosition: {x: -3.01, y: 1.009, z: -13.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 585507991}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -46.96, z: 0}
 --- !u!114 &1300902887 stripped
@@ -8281,7 +8287,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1690361810}
   m_OnClick:
     m_PersistentCalls:
@@ -89633,7 +89639,6 @@ SceneRoots:
   - {fileID: 2130375573145588346}
   - {fileID: 503592700}
   - {fileID: 1280231109}
-  - {fileID: 585507991}
   - {fileID: 2022251234}
   - {fileID: 1263954510}
   - {fileID: 1070789835}
