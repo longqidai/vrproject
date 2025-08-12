@@ -11,6 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/EasyAssets/Korean_Style_Bar/BG/Demo Scenes/meetingscene.unity
     guid: 2e946e8dbe57b7c479490f3627dabcea
+  - enabled: 1
+    path: Assets/other stuffs/Scenes/World_Outdoor.unity
+    guid: 5041d70b592f91c4c8b6824c2ef6484f
+  - enabled: 1
+    path: Assets/other stuffs/Scenes/World_School.unity
+    guid: b72244336204212439510723e69fa9f9
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 11c62eea3e4d45a47809cce70504169d,
       type: 2}

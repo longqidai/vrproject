@@ -2848,7 +2848,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1129370385}
         m_TargetAssemblyTypeName: RoomManager, Assembly-CSharp
-        m_MethodName: JoinRandomRoom
+        m_MethodName: OnEnterButtonClicked_Outdoor
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10230,7 +10230,7 @@ Transform:
   m_GameObject: {fileID: 598567110}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.772, y: 0.351, z: 2.003}
+  m_LocalPosition: {x: 3.2, y: 0.683, z: -8.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12239,7 +12239,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: choose a world to join
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -16991,7 +16991,7 @@ PrefabInstance:
     - target: {fileID: 670551045257966494, guid: ecb28fd2751b37a419237de32586dcb7,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -506.8572
+      value: -317.1429
       objectReference: {fileID: 0}
     - target: {fileID: 695616758861810245, guid: ecb28fd2751b37a419237de32586dcb7,
         type: 3}
@@ -17381,7 +17381,7 @@ PrefabInstance:
     - target: {fileID: 6833408165286314022, guid: ecb28fd2751b37a419237de32586dcb7,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: JoinRandomRoom
+      value: OnEnterButtonClicked_School
       objectReference: {fileID: 0}
     - target: {fileID: 6833408165286314022, guid: ecb28fd2751b37a419237de32586dcb7,
         type: 3}
@@ -26895,7 +26895,7 @@ PrefabInstance:
     - target: {fileID: 1808051040145743646, guid: 17bafa47335025b4fa8a0e3de781e2d8,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -506.8572
+      value: -317.1429
       objectReference: {fileID: 0}
     - target: {fileID: 2486684299566750763, guid: 17bafa47335025b4fa8a0e3de781e2d8,
         type: 3}

@@ -17,11 +17,16 @@ public class RoomManagerEditorScript : Editor
         // 3. 获取当前检查的RoomManager实例
         RoomManager roomManager = (RoomManager)target;
 
-        // 4. 添加"Join Random Room"按钮
-        if (GUILayout.Button("Join Random Room"))
+       
+        if (GUILayout.Button("Join school Room"))
         {
             // 调用RoomManager的加入随机房间方法
-            roomManager.JoinRandomRoom();
+            roomManager.OnEnterButtonClicked_School();
+        }
+        if (GUILayout.Button("Join outdoor Room"))
+        {
+            // 调用RoomManager的加入随机房间方法
+            roomManager.OnEnterButtonClicked_Outdoor();
         }
     }
 }

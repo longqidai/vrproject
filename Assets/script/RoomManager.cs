@@ -1,19 +1,22 @@
 using Photon.Pun;
 using Photon.Realtime;
-using TMPro; // 添加TextMeshPro命名空间
+using TMPro;
 using UnityEngine;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
     [Header("UI 状态提示")]
-    public TextMeshPro statusText; // VR中显示状态的文本组件
+    public TextMeshPro statusText; 
+
+    private string mapType = MultiplayerVRConstants.MAP_TYPE_VALUE_SCHOOL; 
 
     #region Unity Callbacks
     void Start()
     {
-        // 初始状态提示
         if (statusText != null)
             statusText.text = "准备加入房间...";
+
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
     #endregion
 
@@ -24,6 +27,22 @@ public class RoomManager : MonoBehaviourPunCallbacks
             statusText.text = "正在加入随机房间...";
 
         PhotonNetwork.JoinRandomRoom();
+    }
+
+    public void OnEnterButtonClicked_Outdoor()
+    {
+        mapType = MultiplayerVRConstants.MAP_TYPE_VALUE_OUTDOOR;
+        var expectedProps = new ExitGames.Client.Photon.Hashtable();
+        expectedProps[MultiplayerVRConstants.MAP_TYPE_KEY] = mapType;
+        PhotonNetwork.JoinRandomRoom(expectedProps, 0);
+    }
+
+    public void OnEnterButtonClicked_School()
+    {
+        mapType = MultiplayerVRConstants.MAP_TYPE_VALUE_SCHOOL;
+        var expectedProps = new ExitGames.Client.Photon.Hashtable();
+        expectedProps[MultiplayerVRConstants.MAP_TYPE_KEY] = mapType;
+        PhotonNetwork.JoinRandomRoom(expectedProps, 0);
     }
     #endregion
 
@@ -40,7 +59,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public override void OnCreatedRoom()
     {
-        Debug.Log("A room is created with the name: " + PhotonNetwork.CurrentRoom.Name);
+        Debug.Log($"房间创建: {PhotonNetwork.CurrentRoom.Name} 地图:{mapType}");
 
         if (statusText != null)
             statusText.text = "房间创建成功，等待玩家加入...";
@@ -48,28 +67,27 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        string message = $"玩家 {PhotonNetwork.NickName} 加入了房间 {PhotonNetwork.CurrentRoom.Name+"   player count:"+PhotonNetwork.CurrentRoom.PlayerCount}";
+        string message = $"{PhotonNetwork.NickName} 加入房间 {PhotonNetwork.CurrentRoom.Name} 玩家数:{PhotonNetwork.CurrentRoom.PlayerCount}";
         Debug.Log(message);
 
         if (statusText != null)
             statusText.text = message;
-        if(PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey(MultiplayerVRConstants.MAP_TYPE_KEY))
+
+        
+        if (PhotonNetwork.IsMasterClient)
         {
-            object mapType;
-            if(PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(MultiplayerVRConstants.MAP_TYPE_KEY, out mapType))
-            {
-                Debug.Log("joined room with the map:" + (string)mapType);
-            }
+            LoadSceneBasedOnMapType();
         }
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        string message = $"{newPlayer.NickName} 加入了房间。当前玩家数: {PhotonNetwork.CurrentRoom.PlayerCount}";
-        Debug.Log(message);
-
-        if (statusText != null)
+        
+        if (!PhotonNetwork.IsMasterClient && statusText != null)
+        {
+            string message = $"{newPlayer.NickName} 加入. 当前玩家: {PhotonNetwork.CurrentRoom.PlayerCount}";
             statusText.text = message;
+        }
     }
 
     public override void OnDisconnected(DisconnectCause cause)
@@ -82,31 +100,45 @@ public class RoomManager : MonoBehaviourPunCallbacks
     #region Private Methods
     private void CreateAndJoinRoom()
     {
-        // 1. 生成随机房间名
         string randomRoomName = "Room_" + Random.Range(0, 10000);
 
-        // 2. 创建房间选项
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 20;
+        RoomOptions roomOptions = new RoomOptions
+        {
+            MaxPlayers = 20,
+            
+            CustomRoomProperties = new ExitGames.Client.Photon.Hashtable
+            {
+                { MultiplayerVRConstants.MAP_TYPE_KEY, this.mapType }
+            },
+            CustomRoomPropertiesForLobby = new[] { MultiplayerVRConstants.MAP_TYPE_KEY }
+        };
 
-        // 3. 设置房间的自定义属性（地图类型）
-        string[] roomPropsInLobby = { MultiplayerVRConstants.MAP_TYPE_KEY };
-
-        // 可选地图类型：outdoor(室外) 或 school(学校)
-        string mapType = "school"; // 默认为学校地图
-
-        // 创建自定义房间属性哈希表
-        ExitGames.Client.Photon.Hashtable customRoomProperties = new ExitGames.Client.Photon.Hashtable() { { MultiplayerVRConstants.MAP_TYPE_KEY, MultiplayerVRConstants.MAP_TYPE_VALUE_SCHOOL } };
-
-        // 4. 配置房间属性
-        roomOptions.CustomRoomPropertiesForLobby = roomPropsInLobby;
-        roomOptions.CustomRoomProperties = customRoomProperties;
-
-        // 5. 创建并加入房间
         PhotonNetwork.CreateRoom(randomRoomName, roomOptions);
 
-        Debug.Log($"正在创建房间: {randomRoomName} (地图: {mapType})");
+        Debug.Log($"创建房间: {randomRoomName} 地图:{mapType}");
+
+        if (statusText != null)
+            statusText.text = $"创建房间: {randomRoomName}...";
+    }
+
+    private void LoadSceneBasedOnMapType()
+    {
+        if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(
+            MultiplayerVRConstants.MAP_TYPE_KEY,
+            out object mapTypeObj))
+        {
+            string roomMapType = (string)mapTypeObj;
+            Debug.Log($"主客户端加载地图: {roomMapType}");
+
+            if (roomMapType == MultiplayerVRConstants.MAP_TYPE_VALUE_SCHOOL)
+            {
+                PhotonNetwork.LoadLevel("World_School");
+            }
+            else if (roomMapType == MultiplayerVRConstants.MAP_TYPE_VALUE_OUTDOOR)
+            {
+                PhotonNetwork.LoadLevel("World_Outdoor");
+            }
+        }
     }
     #endregion
-
 }
