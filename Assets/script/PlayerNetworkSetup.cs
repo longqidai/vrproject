@@ -11,10 +11,7 @@ public class PlayerNetworkSetup : MonoBehaviourPunCallbacks
     [Tooltip("本地玩家的XR装备游戏对象")]
     public GameObject LocalXRRigGameObject;
 
-    // 指向玩家身体模型的可视化部分
-    [Header("玩家视觉")]
-    [Tooltip("玩家的视觉表示")]
-    public GameObject PlayerVisuals;
+
     public GameObject AvatarHeadGameobject;
     public GameObject AvatarBodyGameobject;
     // 在游戏开始时初始化玩家设置
@@ -29,8 +26,6 @@ public class PlayerNetworkSetup : MonoBehaviourPunCallbacks
             // 启用本地玩家的XR装备（如头显、手柄等）
             LocalXRRigGameObject.SetActive(true);
 
-            // 禁用玩家的视觉模型，因为本地玩家不需要看到自己的身体
-            PlayerVisuals.SetActive(false);
 
             SetLayerRecursively(AvatarBodyGameobject, 7);
             SetLayerRecursively(AvatarHeadGameobject, 6);
@@ -43,8 +38,7 @@ public class PlayerNetworkSetup : MonoBehaviourPunCallbacks
             // 禁用非本地玩家的XR装备
             LocalXRRigGameObject.SetActive(false);
 
-            // 启用玩家的视觉模型，以便看到其他玩家的角色
-            PlayerVisuals.SetActive(true);
+
             SetLayerRecursively(AvatarBodyGameobject, 0);
             SetLayerRecursively(AvatarHeadGameobject, 0);
         }

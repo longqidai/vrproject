@@ -131,7 +131,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
             }
             else if (room.Name.Contains(MultiplayerVRConstants.MAP_TYPE_VALUE_SCHOOL))
             {
-                OccupancyRateText_ForOutdoor.text = room.PlayerCount + "/" + 20;
+                OccupancyRateText_ForSchool.text = room.PlayerCount + "/" + 20;
             }
         }
     }
@@ -176,5 +176,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
             }
         }
     }
+ 
     #endregion
 }

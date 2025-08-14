@@ -9023,7 +9023,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LocalXRRigGameObject: {fileID: 6612384732612912468}
-  PlayerVisuals: {fileID: 0}
   AvatarHeadGameobject: {fileID: 7445772658875844635}
   AvatarBodyGameobject: {fileID: 2488924203956554897}
 --- !u!1 &2857058254762843842
@@ -15764,7 +15763,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4197336540936164535}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7476359735632973382}
+        m_TargetAssemblyTypeName: LocalPlayerUIManager, Assembly-CSharp
+        m_MethodName: OnPressButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4197336540936164535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17466,7 +17477,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6395280365939313487}
-  - component: {fileID: 2953073260136848840}
+  - component: {fileID: 7476359735632973382}
   m_Layer: 2
   m_Name: PLayer UI Manager
   m_TagString: Untagged
@@ -17489,7 +17500,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7770167967153759040}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2953073260136848840
+--- !u!114 &7476359735632973382
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -17501,7 +17512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52400cc7ee860394e837f99d6e6ad714, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GoHome_Button: {fileID: 4772039527837967305}
+  meetingSceneName: meetingscene
 --- !u!1 &5629244140890747114
 GameObject:
   m_ObjectHideFlags: 0
@@ -28963,7 +28974,7 @@ PrefabInstance:
     - target: {fileID: 435400185275737161, guid: 69edaa7f6d0367845b76420b47e4be35,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 656788606210426475, guid: 69edaa7f6d0367845b76420b47e4be35,
         type: 3}
@@ -28973,7 +28984,7 @@ PrefabInstance:
     - target: {fileID: 1907895810234910805, guid: 69edaa7f6d0367845b76420b47e4be35,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2358229838650507380, guid: 69edaa7f6d0367845b76420b47e4be35,
         type: 3}
@@ -28998,7 +29009,7 @@ PrefabInstance:
     - target: {fileID: 6891889006077643999, guid: 69edaa7f6d0367845b76420b47e4be35,
         type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7686800500755628313, guid: 69edaa7f6d0367845b76420b47e4be35,
         type: 3}
