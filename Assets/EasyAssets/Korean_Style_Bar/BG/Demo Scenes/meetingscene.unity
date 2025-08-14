@@ -8977,7 +8977,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 503
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -16617,6 +16617,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusText: {fileID: 905364020}
+  OccupancyRateText_ForSchool: {fileID: 484980211}
+  OccupancyRateText_ForOutdoor: {fileID: 1050192206}
 --- !u!4 &1129370386
 Transform:
   m_ObjectHideFlags: 0

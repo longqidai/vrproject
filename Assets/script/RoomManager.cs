@@ -2,12 +2,14 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
     [Header("UI 状态提示")]
-    public TextMeshPro statusText; 
-
+    public TextMeshPro statusText;
+    public TextMeshProUGUI OccupancyRateText_ForSchool;
+    public TextMeshProUGUI OccupancyRateText_ForOutdoor;
     private string mapType = MultiplayerVRConstants.MAP_TYPE_VALUE_SCHOOL; 
 
     #region Unity Callbacks
@@ -17,6 +19,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
             statusText.text = "准备加入房间...";
 
         PhotonNetwork.AutomaticallySyncScene = true;
+        if(PhotonNetwork.IsConnectedAndReady)
+        {
+            PhotonNetwork.JoinLobby();
+        }
     }
     #endregion
 
@@ -95,12 +101,37 @@ public class RoomManager : MonoBehaviourPunCallbacks
         if (statusText != null)
             statusText.text = $"连接断开: {cause}";
     }
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        if(roomList.Count==0)
+        {
+            OccupancyRateText_ForSchool.text = 0 + "/" + 20;
+            OccupancyRateText_ForOutdoor.text = 0 + "/" + 20;
+        }
+        foreach(RoomInfo room in roomList)
+        {
+            Debug.Log(room.Name);
+            if(room.Name.Contains(MultiplayerVRConstants.MAP_TYPE_VALUE_OUTDOOR))
+            {
+                OccupancyRateText_ForOutdoor.text = room.PlayerCount + "/" + 20;
+            }
+            else if(room.Name.Contains(MultiplayerVRConstants.MAP_TYPE_VALUE_SCHOOL))
+            {
+                OccupancyRateText_ForOutdoor.text = room.PlayerCount + "/" + 20;
+            }
+        }
+    }
+
+    public override void OnJoinedLobby()
+    {
+        Debug.Log("Joined the Lobby");
+    }
     #endregion
 
     #region Private Methods
     private void CreateAndJoinRoom()
     {
-        string randomRoomName = "Room_" + Random.Range(0, 10000);
+        string randomRoomName = "Room_" +mapType+ Random.Range(0, 10000);
 
         RoomOptions roomOptions = new RoomOptions
         {

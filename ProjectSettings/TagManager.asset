@@ -9,11 +9,12 @@ TagManager:
   - Anchor
   - PlayerHand
   - Destroyer
+  - Floor
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - teleport
   - Water
   - UI
   - Player
