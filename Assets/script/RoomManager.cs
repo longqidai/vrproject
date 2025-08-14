@@ -1,28 +1,28 @@
+ï»¿using System.Collections.Generic; // æ·»åŠ æ­¤è¡Œ
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine;
-using System.Collections.Generic;
+
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
-    [Header("UI ×´Ì¬ÌáÊ¾")]
-    public TextMeshPro statusText;
+    [Header("UI çŠ¶æ€æç¤º")]
+    public TextMeshProUGUI statusText;
+    [Header("æˆ¿é—´çŠ¶æ€UI")]
     public TextMeshProUGUI OccupancyRateText_ForSchool;
     public TextMeshProUGUI OccupancyRateText_ForOutdoor;
+
+
     private string mapType = MultiplayerVRConstants.MAP_TYPE_VALUE_SCHOOL; 
 
     #region Unity Callbacks
     void Start()
     {
         if (statusText != null)
-            statusText.text = "×¼±¸¼ÓÈë·¿¼ä...";
+            statusText.text = "å‡†å¤‡åŠ å…¥æˆ¿é—´...";
 
         PhotonNetwork.AutomaticallySyncScene = true;
-        if(PhotonNetwork.IsConnectedAndReady)
-        {
-            PhotonNetwork.JoinLobby();
-        }
     }
     #endregion
 
@@ -30,7 +30,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public void JoinRandomRoom()
     {
         if (statusText != null)
-            statusText.text = "ÕıÔÚ¼ÓÈëËæ»ú·¿¼ä...";
+            statusText.text = "æ­£åœ¨åŠ å…¥éšæœºæˆ¿é—´...";
 
         PhotonNetwork.JoinRandomRoom();
     }
@@ -58,28 +58,28 @@ public class RoomManager : MonoBehaviourPunCallbacks
         Debug.Log(message);
 
         if (statusText != null)
-            statusText.text = "¼ÓÈëÊ§°Ü£¬ÕıÔÚ´´½¨ĞÂ·¿¼ä...";
+            statusText.text = "åŠ å…¥å¤±è´¥ï¼Œæ­£åœ¨åˆ›å»ºæ–°æˆ¿é—´...";
 
         CreateAndJoinRoom();
     }
 
     public override void OnCreatedRoom()
     {
-        Debug.Log($"·¿¼ä´´½¨: {PhotonNetwork.CurrentRoom.Name} µØÍ¼:{mapType}");
+        Debug.Log($"æˆ¿é—´åˆ›å»º: {PhotonNetwork.CurrentRoom.Name} åœ°å›¾:{mapType}");
 
         if (statusText != null)
-            statusText.text = "·¿¼ä´´½¨³É¹¦£¬µÈ´ıÍæ¼Ò¼ÓÈë...";
+            statusText.text = "æˆ¿é—´åˆ›å»ºæˆåŠŸï¼Œç­‰å¾…ç©å®¶åŠ å…¥...";
     }
 
     public override void OnJoinedRoom()
     {
-        string message = $"{PhotonNetwork.NickName} ¼ÓÈë·¿¼ä {PhotonNetwork.CurrentRoom.Name} Íæ¼ÒÊı:{PhotonNetwork.CurrentRoom.PlayerCount}";
+        string message = $"{PhotonNetwork.NickName} åŠ å…¥æˆ¿é—´ {PhotonNetwork.CurrentRoom.Name} ç©å®¶æ•°:{PhotonNetwork.CurrentRoom.PlayerCount}";
         Debug.Log(message);
 
         if (statusText != null)
             statusText.text = message;
 
-        
+   
         if (PhotonNetwork.IsMasterClient)
         {
             LoadSceneBasedOnMapType();
@@ -88,10 +88,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        
+      
         if (!PhotonNetwork.IsMasterClient && statusText != null)
         {
-            string message = $"{newPlayer.NickName} ¼ÓÈë. µ±Ç°Íæ¼Ò: {PhotonNetwork.CurrentRoom.PlayerCount}";
+            string message = $"{newPlayer.NickName} åŠ å…¥. å½“å‰ç©å®¶: {PhotonNetwork.CurrentRoom.PlayerCount}";
             statusText.text = message;
         }
     }
@@ -99,44 +99,39 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public override void OnDisconnected(DisconnectCause cause)
     {
         if (statusText != null)
-            statusText.text = $"Á¬½Ó¶Ï¿ª: {cause}";
+            statusText.text = $"è¿æ¥æ–­å¼€: {cause}";
     }
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        if(roomList.Count==0)
+        if (roomList.Count == 0)
         {
             OccupancyRateText_ForSchool.text = 0 + "/" + 20;
             OccupancyRateText_ForOutdoor.text = 0 + "/" + 20;
         }
-        foreach(RoomInfo room in roomList)
+        foreach (RoomInfo room in roomList)
         {
             Debug.Log(room.Name);
-            if(room.Name.Contains(MultiplayerVRConstants.MAP_TYPE_VALUE_OUTDOOR))
+            if (room.Name.Contains(MultiplayerVRConstants.MAP_TYPE_VALUE_OUTDOOR))
             {
                 OccupancyRateText_ForOutdoor.text = room.PlayerCount + "/" + 20;
             }
-            else if(room.Name.Contains(MultiplayerVRConstants.MAP_TYPE_VALUE_SCHOOL))
+            else if (room.Name.Contains(MultiplayerVRConstants.MAP_TYPE_VALUE_SCHOOL))
             {
                 OccupancyRateText_ForOutdoor.text = room.PlayerCount + "/" + 20;
             }
         }
-    }
-
-    public override void OnJoinedLobby()
-    {
-        Debug.Log("Joined the Lobby");
     }
     #endregion
 
     #region Private Methods
     private void CreateAndJoinRoom()
     {
-        string randomRoomName = "Room_" +mapType+ Random.Range(0, 10000);
+        string randomRoomName = "Room_" + Random.Range(0, 10000);
 
         RoomOptions roomOptions = new RoomOptions
         {
             MaxPlayers = 20,
-            
+  
             CustomRoomProperties = new ExitGames.Client.Photon.Hashtable
             {
                 { MultiplayerVRConstants.MAP_TYPE_KEY, this.mapType }
@@ -146,10 +141,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
         PhotonNetwork.CreateRoom(randomRoomName, roomOptions);
 
-        Debug.Log($"´´½¨·¿¼ä: {randomRoomName} µØÍ¼:{mapType}");
+        Debug.Log($"åˆ›å»ºæˆ¿é—´: {randomRoomName} åœ°å›¾:{mapType}");
 
         if (statusText != null)
-            statusText.text = $"´´½¨·¿¼ä: {randomRoomName}...";
+            statusText.text = $"åˆ›å»ºæˆ¿é—´: {randomRoomName}...";
     }
 
     private void LoadSceneBasedOnMapType()
@@ -159,7 +154,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
             out object mapTypeObj))
         {
             string roomMapType = (string)mapTypeObj;
-            Debug.Log($"Ö÷¿Í»§¶Ë¼ÓÔØµØÍ¼: {roomMapType}");
+            Debug.Log($"ä¸»å®¢æˆ·ç«¯åŠ è½½åœ°å›¾: {roomMapType}");
 
             if (roomMapType == MultiplayerVRConstants.MAP_TYPE_VALUE_SCHOOL)
             {

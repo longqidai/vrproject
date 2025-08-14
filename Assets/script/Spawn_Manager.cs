@@ -1,7 +1,7 @@
 using UnityEngine;
 using Photon.Pun;
 
-public class Spawn_Manager : MonoBehaviour
+public class Spawn_manager : MonoBehaviour
 {
     [SerializeField]
     GameObject GenericVRPlayerPrefab;  // 玩家预制体（在Inspector中分配）

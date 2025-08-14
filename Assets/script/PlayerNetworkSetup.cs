@@ -3,74 +3,71 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-
-// ï¿½ï¿½ï¿½ï¿½à´¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½Òºï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½
+// Õâ¸öÀà´¦ÀíÍæ¼ÒÍøÂçÉèÖÃ£¬Çø·Ö±¾µØÍæ¼ÒºÍÔ¶³ÌÍæ¼Ò
 public class PlayerNetworkSetup : MonoBehaviourPunCallbacks
 {
-    // Ö¸ï¿½ò±¾µï¿½ï¿½ï¿½Òµï¿½XR×°ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½
-    [Header("XR×°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
-    [Tooltip("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½XR×°ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½")]
+    // Ö¸Ïò±¾µØÍæ¼ÒµÄXR×°±¸ÓÎÏ·¶ÔÏó
+    [Header("XR×°±¸ÉèÖÃ")]
+    [Tooltip("±¾µØÍæ¼ÒµÄXR×°±¸ÓÎÏ·¶ÔÏó")]
     public GameObject LocalXRRigGameObject;
 
-    // Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ÍµÄ¿ï¿½ï¿½Ó»ï¿½ï¿½ï¿½ï¿½ï¿½
-    [Header("ï¿½ï¿½ï¿½ï¿½Ó¾ï¿½")]
-    [Tooltip("ï¿½ï¿½Òµï¿½ï¿½Ó¾ï¿½ï¿½ï¿½Ê¾")]
+    // Ö¸ÏòÍæ¼ÒÉíÌåÄ£ÐÍµÄ¿ÉÊÓ»¯²¿·Ö
+    [Header("Íæ¼ÒÊÓ¾õ")]
+    [Tooltip("Íæ¼ÒµÄÊÓ¾õ±íÊ¾")]
     public GameObject PlayerVisuals;
     public GameObject AvatarHeadGameobject;
     public GameObject AvatarBodyGameobject;
-    // ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½Ê¼Ê±ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    // ÔÚÓÎÏ·¿ªÊ¼Ê±³õÊ¼»¯Íæ¼ÒÉèÖÃ
     void Start()
     {
-        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½Ç·ï¿½ï¿½Éµï¿½Ç°ï¿½Í»ï¿½ï¿½Ë¿ï¿½ï¿½Æ£ï¿½ï¿½Ç·ï¿½ï¿½Ç±ï¿½ï¿½ï¿½ï¿½ï¿½Ò£ï¿½
+        // ¼ì²éÕâ¸öÍæ¼ÒÊµÀýÊÇ·ñÓÉµ±Ç°¿Í»§¶Ë¿ØÖÆ£¨ÊÇ·ñÊÇ±¾µØÍæ¼Ò£©
         if (photonView.IsMine)
         {
-            // ï¿½ï¿½ï¿½Ç±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-            Debug.Log("ï¿½ï¿½ï¿½î±¾ï¿½ï¿½ï¿½ï¿½Òµï¿½XRï¿½è±¸");
+            // ÕâÊÇ±¾µØÍæ¼Ò
+            Debug.Log("¼¤»î±¾µØÍæ¼ÒµÄXRÉè±¸");
 
-            // ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½XR×°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½Ô¡ï¿½ï¿½Ö±ï¿½ï¿½È£ï¿½
+            // ÆôÓÃ±¾µØÍæ¼ÒµÄXR×°±¸£¨ÈçÍ·ÏÔ¡¢ÊÖ±úµÈ£©
             LocalXRRigGameObject.SetActive(true);
 
-            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½Ó¾ï¿½Ä£ï¿½Í£ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            // ½ûÓÃÍæ¼ÒµÄÊÓ¾õÄ£ÐÍ£¬ÒòÎª±¾µØÍæ¼Ò²»ÐèÒª¿´µ½×Ô¼ºµÄÉíÌå
             PlayerVisuals.SetActive(false);
 
             SetLayerRecursively(AvatarBodyGameobject, 7);
             SetLayerRecursively(AvatarHeadGameobject, 6);
-
-           
         }
         else
         {
-            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½Êµï¿½ï¿½
-            Debug.Log("ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Òµï¿½XRï¿½è±¸");
+            // ÕâÊÇÆäËûÍæ¼ÒµÄÊµÀý
+            Debug.Log("½ûÓÃÔ¶³ÌÍæ¼ÒµÄXRÉè±¸");
 
-            // ï¿½ï¿½ï¿½Ã·Ç±ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½XR×°ï¿½ï¿½
+            // ½ûÓÃ·Ç±¾µØÍæ¼ÒµÄXR×°±¸
             LocalXRRigGameObject.SetActive(false);
 
-            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½Ó¾ï¿½Ä£ï¿½Í£ï¿½ï¿½Ô±ã¿´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒµÄ½ï¿½É«
+            // ÆôÓÃÍæ¼ÒµÄÊÓ¾õÄ£ÐÍ£¬ÒÔ±ã¿´µ½ÆäËûÍæ¼ÒµÄ½ÇÉ«
             PlayerVisuals.SetActive(true);
             SetLayerRecursively(AvatarBodyGameobject, 0);
             SetLayerRecursively(AvatarHeadGameobject, 0);
         }
     }
 
-    // Ã¿Ö¡ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÊµÊ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    // Ã¿Ö¡¸üÐÂ£¨¿ÉÒÔÓÃÓÚ´¦ÀíÍæ¼ÒÊäÈë»òÆäËûÊµÊ±²Ù×÷£©
     void Update()
     {
-        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç±ï¿½ï¿½ï¿½ï¿½ï¿½Ò£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½
+        // Èç¹ûÕâÊÇ±¾µØÍæ¼Ò£¬´¦ÀíÊäÈëºÍ¿ØÖÆ
         if (photonView.IsMine)
         {
-            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó±ï¿½ï¿½ï¿½ï¿½ï¿½Ò¿ï¿½ï¿½Æµï¿½ï¿½ß¼ï¿½
-            // ï¿½ï¿½ï¿½ç£ºï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            // ÔÚÕâÀïÌí¼Ó±¾µØÍæ¼Ò¿ØÖÆµÄÂß¼­
+            // ÀýÈç£ºÒÆ¶¯¡¢½»»¥µÈ
         }
     }
-    // ï¿½ï¿½ï¿½ÓµÝ¹ï¿½ï¿½ï¿½ï¿½Ã²ã¼¶ï¿½Ä·ï¿½ï¿½ï¿½
+    // Ìí¼ÓµÝ¹éÉèÖÃ²ã¼¶µÄ·½·¨
     private void SetLayerRecursively(GameObject obj, int layer)
     {
         if (obj == null) return;
 
         obj.layer = layer;
 
-        // ï¿½Ý¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¶ï¿½ï¿½ï¿½ã¼¶
+        // µÝ¹éÉèÖÃ×Ó¶ÔÏó²ã¼¶
         for (int i = 0; i < obj.transform.childCount; i++)
         {
             SetLayerRecursively(obj.transform.GetChild(i).gameObject, layer);
