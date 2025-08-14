@@ -16616,7 +16616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9be7848c63715374094b64e86e3d4756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusText: {fileID: 0}
+  statusText: {fileID: 905364020}
   OccupancyRateText_ForSchool: {fileID: 484980211}
   OccupancyRateText_ForOutdoor: {fileID: 1050192206}
 --- !u!4 &1129370386
