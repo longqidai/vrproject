@@ -27,8 +27,8 @@ public class PlayerNetworkSetup : MonoBehaviourPunCallbacks
             LocalXRRigGameObject.SetActive(true);
 
 
-            SetLayerRecursively(AvatarBodyGameobject, 7);
-            SetLayerRecursively(AvatarHeadGameobject, 6);
+            SetLayerRecursively(AvatarBodyGameobject, 10);
+            SetLayerRecursively(AvatarHeadGameobject, 9);
         }
         else
         {
