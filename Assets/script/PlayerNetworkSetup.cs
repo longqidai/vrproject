@@ -10,7 +10,7 @@ public class PlayerNetworkSetup : MonoBehaviourPunCallbacks
     [Header("XR装备设置")]
     [Tooltip("本地玩家的XR装备游戏对象")]
     public GameObject LocalXRRigGameObject;
-
+    public GameObject MainAvatarGameobject;
 
     public GameObject AvatarHeadGameobject;
     public GameObject AvatarBodyGameobject;
@@ -29,6 +29,7 @@ public class PlayerNetworkSetup : MonoBehaviourPunCallbacks
 
             SetLayerRecursively(AvatarBodyGameobject, 10);
             SetLayerRecursively(AvatarHeadGameobject, 9);
+            MainAvatarGameobject.AddComponent<AudioListener>();
         }
         else
         {

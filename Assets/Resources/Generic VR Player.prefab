@@ -8966,7 +8966,7 @@ GameObject:
   - component: {fileID: 8012686393313712638}
   - component: {fileID: 7008850680603465734}
   - component: {fileID: 4967279638042938441}
-  - component: {fileID: 8596604746275831721}
+  - component: {fileID: 3802697279970072190}
   m_Layer: 0
   m_Name: Generic VR Player
   m_TagString: Untagged
@@ -9027,6 +9027,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LocalXRRigGameObject: {fileID: 6612384732612912468}
+  MainAvatarGameobject: {fileID: 2438943727794598724}
   AvatarHeadGameobject: {fileID: 7445772658875844635}
   AvatarBodyGameobject: {fileID: 2488924203956554897}
 --- !u!114 &7008850680603465734
@@ -9063,7 +9064,7 @@ MonoBehaviour:
   bodyTransform: {fileID: 2108468319791498759}
   leftHandTransform: {fileID: 3954161121070634587}
   rightHandTransform: {fileID: 368589506686595328}
---- !u!114 &8596604746275831721
+--- !u!114 &3802697279970072190
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -27639,7 +27640,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3040409534713898318}
   - component: {fileID: 8236953426674813139}
-  - component: {fileID: 3699510658898948390}
   - component: {fileID: 7240915609155915565}
   - component: {fileID: 7306274581486813134}
   m_Layer: 0
@@ -27718,14 +27718,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &3699510658898948390
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8669247787631689055}
-  m_Enabled: 1
 --- !u!114 &7240915609155915565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29289,6 +29281,12 @@ Transform:
 --- !u!4 &2108468319791498759 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6948015380527318601, guid: 69edaa7f6d0367845b76420b47e4be35,
+    type: 3}
+  m_PrefabInstance: {fileID: 9020296539257323598}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2438943727794598724 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6698639957168452362, guid: 69edaa7f6d0367845b76420b47e4be35,
     type: 3}
   m_PrefabInstance: {fileID: 9020296539257323598}
   m_PrefabAsset: {fileID: 0}
