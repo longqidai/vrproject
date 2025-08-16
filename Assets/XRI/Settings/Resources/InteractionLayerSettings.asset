@@ -16,7 +16,7 @@ MonoBehaviour:
   - Default
   - 
   - 
-  - 
+  - teleport
   - 
   - UI
   - 
@@ -44,4 +44,4 @@ MonoBehaviour:
   - 
   - 
   - 
-  - Teleport
+  - 
