@@ -13,7 +13,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - interactable
+  - teleport
   - Water
   - UI
   - Player
