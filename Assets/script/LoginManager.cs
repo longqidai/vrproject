@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI; // 添加UI命名空间
 using Photon.Realtime;
-
+using System.Threading;
 public class LoginManager : MonoBehaviourPunCallbacks
 {
     public TMP_InputField PlayerName_InputField;
@@ -43,7 +43,8 @@ public class LoginManager : MonoBehaviourPunCallbacks
         // 修复方法名拼写 ↓
         PhotonNetwork.ConnectUsingSettings();
 
-        statusText.text = "Connecting...";
+        statusText.text = "Login successful as user:"+ PhotonNetwork.NickName;
+        Thread.Sleep(1000);
         statusText.color = Color.yellow;
         loginButton.interactable = false; // 禁用按钮
     }
