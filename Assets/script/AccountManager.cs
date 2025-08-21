@@ -21,18 +21,21 @@ public class AccountManager : MonoBehaviour
     {
         // 1为登录按钮绑定点击事件
         loginBtn.onClick.AddListener(OnLoginBtnClick);
-
+        registerBtn.onClick.AddListener(OnRegisterBtnClick);
         // 根据第二张图，未显示注册按钮绑定，但通常需要绑定，此处按图片显示保留
         // 若需绑定注册按钮可添加：registerBtn.onClick.AddListener(OnRegisterBtnClick);
     }
+    public void OnRegisterBtnClick()
+    {
+        // 直接调用数据库验证
+        Register();
 
+        // 状态更新已通过事件机制处理
+    }
     public void OnLoginBtnClick()
     {
         // 直接调用数据库验证
-        bool isValid = dataConnector.Login(
-            userName_login_InputField.text,
-            password_login_InputField.text
-        );
+        Login();
 
         // 状态更新已通过事件机制处理
     }
@@ -43,13 +46,17 @@ public class AccountManager : MonoBehaviour
         dataConnector.Login(userName_login_InputField.text, password_login_InputField.text);
     }
 
-    // 注意：第二张图中未显示注册方法，根据第一张图，注册部分UI元素存在但未实现功能
-    // 以下注册方法为可选添加（图片中未出现，根据常理补充）
-    /*
-    private void OnRegisterBtnClick()
+    private void Register()
     {
-        // 实现注册逻辑
-        // 示例：dataConnector.Register(...);
+        string pw = password_register_InputField.text;
+        string cpw = confirmPassword_register_InputField.text;
+        if (pw.Equals(cpw))
+        {
+            dataConnector.InsertUser(userName_register_InputField.text, pw);
+        }
+        else
+        {
+            Debug.LogError("different Password!");
+        }
     }
-    */
 }

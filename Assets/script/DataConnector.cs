@@ -6,7 +6,6 @@ public class DataConnector : MonoBehaviour
 {
     private string connectionString = "Server=172.16.0.57;Database=user info;User ID=root;Password=123456;";
     private MySqlConnection connection;
-    public TextMeshPro statustext;
     // 1Awake 在脚本初始化时调用，但不会在编辑模式下自动连接数据库
     private void Awake()
     {
@@ -39,6 +38,23 @@ public class DataConnector : MonoBehaviour
             Debug.LogError($"Database connection error: {ex.Message}");
         }
     }
+    public void InsertUser(string username, string password)
+    {
+        string query = "INSERT INTO Users (Username, Password) VALUES (@Username, @Password);";
+        MySqlCommand command = new MySqlCommand(query, connection);
+        command.Parameters.AddWithValue("@Username", username);
+        command.Parameters.AddWithValue("@Password", password);
+        int rowsAffected = command.ExecuteNonQuery();
+        if (rowsAffected > 0)
+        {
+            Debug.Log("User inserted successfully.");
+        }
+        else
+        {
+            Debug.LogError("Failed to insert user.");
+        }
+    }
+
     public bool Login(string username, string password)
     {
         string query = "SELECT * FROM Users WHERE Username = @username AND Password = @password;";
@@ -51,16 +67,14 @@ public class DataConnector : MonoBehaviour
         if (reader.HasRows)
         {
             Debug.Log("Login successful for username: " + username);
-            statustext.text = "login successful";
-            statustext.color = Color.green;
+            
             reader.Close();
             return true;
         }
         else
         {
             Debug.Log("Invalid username or password.");
-            statustext.text = "login failed";
-            statustext.color = Color.red;
+            
             reader.Close();
             return false;
         }
